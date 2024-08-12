@@ -50,7 +50,7 @@ struct LSApp {
             }
             guard let bundleId = item.perform(#selector(getter: LSAppProxy.bundleIdentifier)) else { continue }
             guard let version = item.perform(#selector(getter: LSAppProxy.shortVersionString)) else { continue }
-            let icon = UIImage._applicationIconImage(forBundleIdentifier: bundleId.takeUnretainedValue() as? String, format: 1, scale: UIScreen.main.scale)
+            let icon = UIImage._applicationIconImage(forBundleIdentifier: bundleId.takeUnretainedValue() as? String, format: 10, scale: UIScreen.main.scale)
             list.append(Info(appName: appName!.takeUnretainedValue() as! String, version: version.takeUnretainedValue() as! String, bundleId: bundleId.takeUnretainedValue() as! String, icon: icon as? UIImage))
         }
         return list
