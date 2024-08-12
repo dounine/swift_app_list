@@ -14,7 +14,7 @@ struct ContentView: View {
         List {
             ForEach(list, id: \.bundleId) { item in
                 HStack {
-                    Image(systemName: "wifi")
+                    Image(uiImage: item.icon ?? UIImage())
                     VStack(alignment: .leading) {
                         Text(item.appName)
                         Group {

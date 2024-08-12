@@ -7,6 +7,7 @@
 
 import Foundation
 import MobileCoreServices
+import UIKit
 
 @objc protocol LSApplicationWorkspace {
     static func defaultWorkspace() -> Self
@@ -44,7 +45,8 @@ struct LSApp {
             guard let appName = item.perform(#selector(getter: LSAppProxy.itemName)) else { continue }
             guard let bundleId = item.perform(#selector(getter: LSAppProxy.bundleIdentifier)) else { continue }
             guard let version = item.perform(#selector(getter: LSAppProxy.shortVersionString)) else { continue }
-            list.append(Info(appName: appName.takeUnretainedValue() as! String, version: version.takeUnretainedValue() as! String, bundleId: bundleId.takeUnretainedValue() as! String))
+            let icon = UIImage._applicationIconImage(forBundleIdentifier: bundleId.takeUnretainedValue() as? String, format: 1, scale: UIScreen.main.scale)
+            list.append(Info(appName: appName.takeUnretainedValue() as! String, version: version.takeUnretainedValue() as! String, bundleId: bundleId.takeUnretainedValue() as! String, icon: icon as? UIImage))
         }
         return list
     }
@@ -53,5 +55,6 @@ struct LSApp {
         let appName: String
         let version: String
         let bundleId: String
+        let icon: UIImage?
     }
 }
